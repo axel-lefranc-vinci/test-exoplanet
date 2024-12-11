@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "start": "nodemon app.js",
-    "test-eslint": "eslint --rulesdir ./tests .",
     "test": "jasmine"
   },
   "dependencies": {
