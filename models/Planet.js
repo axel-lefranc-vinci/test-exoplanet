@@ -6,9 +6,11 @@ module.exports.list = () => {
 };
 
 module.exports.save = (data) => {
+  console.log(data);
       const stmt = db.prepare('INSERT INTO PLANETS(planet_id, unique_name, type, discovery_year, size, atmosphere) VALUES (?, ?, ?, ?, ?, ?)');
       const info = stmt.run(data.id, data.uniqueName, data.type, data.discoveryYear, data.size, data.atmosphere);
       console.log("planet model save" + info.changes);
+      
   };
 
 /*module.exports = {

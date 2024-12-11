@@ -12,6 +12,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/add', function (req, res, next) {
     console.log("POST ADD PLANET");
+    console.log(req.body);
         Planet.save({
             id : req.body.idPlanet,
             uniqueName: req.body.uniqueNamePlanet,
@@ -19,10 +20,17 @@ router.post('/add', function (req, res, next) {
             discoveryYear: req.body.discoveryYearPlanet,
             size: req.body.sizePlanet,
             atmosphere: req.body.atmospherePlanet
+        
         });
         res.redirect('/planets');
 })
 
+
+router.post('/test', function (req, res, next) {
+    console.log("POST ADD PLANET");
+    console.log(req.body);
+})
+        
 
 /*router.post('/planets', async (req, res) => {
     const { name, size, atmosphere } = req.body;

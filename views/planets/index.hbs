@@ -20,20 +20,21 @@
         {{/each}}
     </table>
 </section>
+
 <section>
     <h1>Ajouter une Planète découverte</h1>
-    <form method="post" action="/planets/add" enctype="multipart/form-data">
+    <form method="post" action="/planets/add">
         <div>
             <label> ID : </label>
-            <input type="number" name="idPlanet" />
+            <input type="number" id="idPlanet" name="idPlanet" />
         </div>
         <div>
             <label>Nom de la planète découverte : </label>
-            <input type="text" name="uniqueNamePlanet" />
+            <input type="text" id="uniqueNamePlanet" name="uniqueNamePlanet" />
         </div>
         <div>
             <label>Classe Habitable de l'exoplanète : </label>
-            <select name="typePlanet">
+            <select id="typePlanet" name="typePlanet">
                 <option value="Gazeuse"> Gazeuse</option>
                 <option value="Glacée">Glacée</option>
                 <option value="Naine">Naine</option>
@@ -42,22 +43,33 @@
         </div>
         <div>
             <label> Année de découverte : </label>
-            <input type="number" min="2000" max="2025" step="1" value="2022" name="discoveryYearPlanet" />
+            <input type="number" min="2000" max="2025" step="1" value="2022" id="discoveryYearPlanet" name="discoveryYearPlanet" />
         </div>
         <div>
             <label> Taille de la planète : </label>
-            <input type="number" min="0" max="100" step="1" value="50" name="sizePlanet" />
+            <input type="number" min="0" max="100" step="1" value="50" id="sizePlanet" name="sizePlanet" />
         </div>
          <div>
             <label>Classe Habitable de la planète : </label>
-            <select name="atmosphere">
+            <select id="atmospherePlanet" name="atmospherePlanet">
                 <option value="Dense"> Dense</option>
                 <option value="Ténue">Ténue</option>
                 <option value="Sans atmosphère">Sans atmosphère</option>
             </select>
         </div>
         <div>
-            <input type="submit" value="Envoyer">
+            <button type="submit" value="Envoyer">
         </div>
     </form>
+</section>
+<section>
+<form  action="/planets/add" method="post">
+  <label for="name">Nom :</label>
+  <input type="text" id="name" name="name" >
+
+  <label for="email">Email :</label>
+  <input type="email" id="email" name="email" >
+
+  <button type="submit">Envoyer</button>
+</form>
 </section>
