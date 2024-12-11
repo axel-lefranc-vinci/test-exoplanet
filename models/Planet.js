@@ -15,3 +15,5 @@ module.exports.save = (data) => {
 module.exports.findOne = (uniqueName) => {
   return db.prepare('SELECT * FROM EXOPLANETS WHERE unique_name = ?').get(uniqueName);
 };
+
+module.exports.clear = () => { db.prepare('DELETE FROM planets').run(); }
