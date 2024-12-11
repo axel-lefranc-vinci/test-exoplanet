@@ -1,3 +1,4 @@
+<section>
 <table>
         <tr>
             <th>ID planete</th>
@@ -23,6 +24,10 @@
     <h1>Ajouter une Planète découverte</h1>
     <form method="post" action="/planets/add" enctype="multipart/form-data">
         <div>
+            <label> ID : </label>
+            <input type="number" name="idPlanet" />
+        </div>
+        <div>
             <label>Nom de la planète découverte : </label>
             <input type="text" name="uniqueNamePlanet" />
         </div>
@@ -45,7 +50,7 @@
         </div>
          <div>
             <label>Classe Habitable de la planète : </label>
-            <select name="typePlanet">
+            <select name="atmosphere">
                 <option value="Dense"> Dense</option>
                 <option value="Ténue">Ténue</option>
                 <option value="Sans atmosphère">Sans atmosphère</option>
@@ -56,4 +61,3 @@
         </div>
     </form>
 </section>
-<section>

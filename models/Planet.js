@@ -6,20 +6,11 @@ module.exports.list = () => {
 };
 
 module.exports.save = (data) => {
-  //no id => add exoplanet
-  if (data.id === undefined) {
-      const stmt = db.prepare('INSERT INTO PLANETS(unique_name, type, discovery_year, size, atmosphere) VALUES (?, ?, ?, ?, ?)');
-      const info = stmt.run(data.uniqueName, data.hClass, data.discoveryYear, data.image);
+      const stmt = db.prepare('INSERT INTO PLANETS(planet_id, unique_name, type, discovery_year, size, atmosphere) VALUES (?, ?, ?, ?, ?, ?)');
+      const info = stmt.run(data.id, data.uniqueName, data.type, data.discoveryYear, data.size, data.atmosphere);
       console.log("planet model save" + info.changes);
-  }
-  // id => update exoplanet
-  else {
-      const stmt = db.prepare('UPDATE PLANETS SET unique_name = ?, type = ?, discovery_year = ?, size = ?, atmosphere = ? WHERE planet_id = ?');
-      const info = stmt.run(data.uniqueName, data.type, data.discoveryYear, data.size, data.atmosphere, data.id);
-      console.log("planet model save update" + info.changes);
+  };
 
-  }
-}
 /*module.exports = {
   save: (data) => {
     console.log("SAVE :" + JSON.stringify(data));
@@ -61,4 +52,4 @@ module.exports.save = (data) => {
 
 module.exports.findOne = (uniqueName) => {
   return db.prepare('SELECT * FROM EXOPLANETS WHERE unique_name = ?').get(uniqueName);
-}
+};
