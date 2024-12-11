@@ -1,7 +1,9 @@
 const Planet = require('../../models/Planet');
 
 describe('Planet Model', () => {
-
+  beforeEach(() => {
+    Planet.clear();
+  });
 
   it('Test 1: doit enregistrer une nouvelle planète', () => {
     const planet = {
@@ -55,7 +57,7 @@ describe('Planet Model', () => {
     try {
       Planet.save(invalidPlanet);
     } catch (error) {
-      expect(error.message).toEqual('Invalid planet characteristics');
+      expect(error.message).toEqual('Invalid planet type');
     }
   });
 
