@@ -1,13 +1,11 @@
 <table>
         <tr>
-            <th>Id Exoplanète</th>
-            <th>Nom Exoplanète</th>
-            <th>hClass</th>
+            <th>ID planete</th>
+            <th>Nom planete</th>
+            <th>Type</th>
             <th>Année de découverte</th>
-            <th>Image</th>
-        {{#if session.connected}}
-            <th>Actions</th>
-        {{/if}}
+            <th>Taille</th>
+            <th>Atmosphere</th>
         </tr>
         {{#each planetsTable}}
         <tr>
@@ -48,10 +46,9 @@
          <div>
             <label>Classe Habitable de la planète : </label>
             <select name="typePlanet">
-                <option value="Dense"> Gazeuse</option>
-                <option value="Ténue">Glacée</option>
-                <option value="Sans atmosphère">Naine</option>
-                <option value="Exotique">Exotique</option>
+                <option value="Dense"> Dense</option>
+                <option value="Ténue">Ténue</option>
+                <option value="Sans atmosphère">Sans atmosphère</option>
             </select>
         </div>
         <div>

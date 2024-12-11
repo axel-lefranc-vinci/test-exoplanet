@@ -1,6 +1,26 @@
 const db = require('../models/db_conf');
 
-module.exports = {
+
+module.exports.list = () => {
+  return db.prepare("SELECT * FROM planets").all();
+};
+
+module.exports.save = (data) => {
+  //no id => add exoplanet
+  if (data.id === undefined) {
+      const stmt = db.prepare('INSERT INTO PLANETS(unique_name, type, discovery_year, size, atmosphere) VALUES (?, ?, ?, ?, ?)');
+      const info = stmt.run(data.uniqueName, data.hClass, data.discoveryYear, data.image);
+      console.log("planet model save" + info.changes);
+  }
+  // id => update exoplanet
+  else {
+      const stmt = db.prepare('UPDATE PLANETS SET unique_name = ?, type = ?, discovery_year = ?, size = ?, atmosphere = ? WHERE planet_id = ?');
+      const info = stmt.run(data.uniqueName, data.type, data.discoveryYear, data.size, data.atmosphere, data.id);
+      console.log("planet model save update" + info.changes);
+
+  }
+}
+/*module.exports = {
   save: (data) => {
     console.log("SAVE :" + JSON.stringify(data));
     // Si pas d'id => ajouter une planète
@@ -36,4 +56,9 @@ module.exports = {
     const info = stmt.run(id);
     console.log("Planet model delete:" + info.changes);
   },
-};
+  
+};*/
+
+module.exports.findOne = (uniqueName) => {
+  return db.prepare('SELECT * FROM EXOPLANETS WHERE unique_name = ?').get(uniqueName);
+}

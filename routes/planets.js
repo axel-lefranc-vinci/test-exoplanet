@@ -3,7 +3,12 @@ const router = express.Router();
 
 const validator = require('validator');
 
-const Exoplanet = require("../models/Planet.js");
+const Planet = require("../models/Planet.js");
+
+router.get('/', function (req, res, next) {
+    const planetsTable = Planet.list();
+    res.render('planets/index.hbs', { planetsTable});
+});
 
 router.post('/add', function (req, res, next) {
     console.log("POST ADD PLANET");
@@ -18,11 +23,11 @@ router.post('/add', function (req, res, next) {
         res.redirect('/planets');
     }
     else {
-        res.redirect('/planets?errors= Le nom d\'une exoplanète doit faire entre 3 et 100 caractères');
+        res.redirect('/planets?errors= Le nom d\'une planète doit faire entre 3 et 100 caractères');
     }
 });
 
-router.post('/', async (req, res) => {
+/*router.post('/planets', async (req, res) => {
     const { name, size, atmosphere } = req.body;
   
     // Vérification de la duplication
@@ -35,7 +40,7 @@ router.post('/', async (req, res) => {
     // Ajout de la planète
     await Planet.create({ name, size, atmosphere });
     res.render('exoplanets/register', { message: 'Planet added successfully' });
-});
+});*/
   
 
 
