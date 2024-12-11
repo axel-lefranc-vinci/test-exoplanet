@@ -1,16 +1,7 @@
 const Planet = require('../../models/Planet');
 
 describe('Planet Model', () => {
-  beforeEach(() => {
-    // Réinitialise avant chaque test
-    Planet.clear();
-  });
-
-  afterAll(() => {
-    // Réinitialise après tous les tests
-    Planet.clear();
-  });
-
+  
   it('Test 1: doit enregistrer une nouvelle planète', () => {
     const planet = {
       uniqueName: 'Earth',
@@ -64,7 +55,7 @@ describe('Planet Model', () => {
 
   it('Test 5: Mock de la fonction save', () => {
     spyOn(Planet, 'save').and.callFake((data) => {
-      console.log('Mock Save Called with:', data);
+ 
     });
     Planet.save({
       uniqueName: 'Mars',

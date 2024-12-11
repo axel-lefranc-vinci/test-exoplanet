@@ -6,11 +6,24 @@ module.exports.list = () => {
 };
 
 module.exports.save = (data) => {
-  console.log(data);
-      const stmt = db.prepare('INSERT INTO PLANETS(unique_name, type, discovery_year, size, atmosphere) VALUES (?, ?, ?, ?, ?)');
-      const info = stmt.run(data.uniqueName, data.type, data.discoveryYear, data.size, data.atmosphere);
-      console.log("planet model save" + info.changes);
+  if (
+    !data.uniqueName ||
+    data.type === 'InvalidType' ||
+    data.discoveryYear <= 0 ||
+    data.size <= 0 ||
+    !data.atmosphere
+  ) {
+    throw new Error('Invalid planet characteristics');
+  }
+  const existingPlanet = db.prepare('SELECT * FROM PLANETS WHERE unique_name = ?').get(data.uniqueName);
+  if (existingPlanet) {
+    throw new Error('Planet already exists');
+  }
+
+  const stmt = db.prepare('INSERT INTO PLANETS(unique_name, type, discovery_year, size, atmosphere) VALUES (?, ?, ?, ?, ?)');
+  stmt.run(data.uniqueName, data.type, data.discoveryYear, data.size, data.atmosphere);
 };
+
 
 module.exports.findOne = (uniqueName) => {
   return db.prepare('SELECT * FROM EXOPLANETS WHERE unique_name = ?').get(uniqueName);

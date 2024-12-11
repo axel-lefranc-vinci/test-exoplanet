@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/add', function (req, res, next) {
     console.log("POST ADD PLANET");
-    console.log(req.body);
+    
         Planet.save({
             id : req.body.idPlanet,
             uniqueName: req.body.uniqueNamePlanet,
@@ -28,7 +28,7 @@ router.post('/add', function (req, res, next) {
 
 router.post('/test', function (req, res, next) {
     console.log("POST ADD PLANET");
-    console.log(req.body);
+
 })
     
 module.exports = router;
