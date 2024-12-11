@@ -47,3 +47,7 @@ module.exports.searchByHclass = (hclass) => {
 module.exports.searchByYear = (year) => {
     return db.prepare('SELECT * FROM EXOPLANETS WHERE discovery_year = ?').all(year);
 }
+
+module.exports.findOne = (uniqueName) => {
+    return db.prepare('SELECT * FROM EXOPLANETS WHERE unique_name = ?').get(uniqueName);
+}
