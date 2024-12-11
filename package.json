@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "start": "nodemon app.js",
-    "test": "eslint --rulesdir ./tests ."
+    "test-eslint": "eslint --rulesdir ./tests .", 
+    "test": "jasmine"
   },
+
   "dependencies": {
     "bcrypt": "^5.1.0",
     "better-sqlite3": "^9.4.3",
@@ -27,6 +29,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.4",
     "eslint-plugin-promise": "^6.0.0",
+    "jasmine": "^5.5.0",
     "nodemon": "^2.0.15"
   }
 }
