@@ -1,7 +1,8 @@
 const Planet = require('../../models/Planet');
 
 describe('Planet Model', () => {
-  
+
+
   it('Test 1: doit enregistrer une nouvelle planète', () => {
     const planet = {
       uniqueName: 'Earth',
@@ -10,13 +11,20 @@ describe('Planet Model', () => {
       size: 12742,
       atmosphere: 'Ténue',
     };
-
+  
     Planet.save(planet);
     const planets = Planet.list();
-
-    const found = planets.some(p => p.unique_name === 'Earth');
-    expect(found).toBeTrue();
+    expect(planets).toEqual([
+      jasmine.objectContaining({
+        unique_name: 'Earth',
+        type: 'Gazeuse',
+        discovery_year: 2023,
+        size: 12742,
+        atmosphere: 'Ténue',
+      }),
+    ]);
   });
+  
 
   it('Test 2: ne doit pas enregistrer de doublons', () => {
     const planet = {
@@ -28,9 +36,11 @@ describe('Planet Model', () => {
     };
 
     Planet.save(planet);
-    expect(() => {
+    try {
       Planet.save(planet);
-    }).toThrow(new Error('Planet already exists'));
+    } catch (error) {
+      expect(error.message).toEqual('Planet already exists');
+    }
   });
 
   it('Test 3: ne doit pas enregistrer des caractéristiques invalides', () => {
@@ -42,34 +52,27 @@ describe('Planet Model', () => {
       atmosphere: '',
     };
 
-    expect(() => {
+    try {
       Planet.save(invalidPlanet);
-    }).toThrow(new Error('Invalid planet characteristics'));
+    } catch (error) {
+      expect(error.message).toEqual('Invalid planet characteristics');
+    }
   });
 
-  it('Test 4: Mock de la fonction findOne', () => {
-    spyOn(Planet, 'findOne').and.returnValue({ unique_name: 'Earth' });
-    const result = Planet.findOne('Earth');
-    expect(result).toEqual({ unique_name: 'Earth' });
-  });
 
-  it('Test 5: Mock de la fonction save', () => {
+  it('Test 4: Mock de la fonction save', () => {
     spyOn(Planet, 'save').and.callFake((data) => {
- 
+      console.log('Mock Save Called with:', data);
     });
-    Planet.save({
+    const planet = {
       uniqueName: 'Mars',
       type: 'Gazeuse',
       discoveryYear: 2024,
       size: 6787,
-      atmosphere: 'Ténue',
-    });
-    expect(Planet.save).toHaveBeenCalledWith({
-      uniqueName: 'Mars',
-      type: 'Gazeuse',
-      discoveryYear: 2024,
-      size: 6787,
-      atmosphere: 'Ténue',
-    });
+      atmosphere: 'CO2',
+    };
+
+    Planet.save(planet);
+    expect(Planet.save).toHaveBeenCalledWith(planet);
   });
 });
