@@ -25,7 +25,7 @@ jobs:
       run: npm install
 
     - name: Run test-eslint
-      run: npm test-eslint
+      run: eslint --rulesdir ./tests .
 
     - name: Run tests
       run: npm test
