@@ -41,6 +41,7 @@ const exoluneRouter = require("./routes/exolunes.js");
 const usersRouter = require('./routes/users.js');
 const membersRouter = require('./routes/members.js');
 const adminRouter = require('./routes/admin.js');
+const planetRouter = require('./routes/planets.js');
 
 const app = express();
 const port = 3000;
@@ -69,6 +70,7 @@ app.use("/exolunes", exoluneRouter);
 app.use("/users", usersRouter);
 app.use("/members", membersRouter);
 app.use("/admin", adminRouter);
+app.use("/planets", planetRouter);
 
 
 // Create error on page not found
