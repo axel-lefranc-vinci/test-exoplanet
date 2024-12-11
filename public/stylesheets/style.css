@@ -116,3 +116,14 @@ form input {
 .filterform {
   display: flex;
 }
+.btn {
+  background-color: #ede9ef;
+    color: rgb(215, 35, 35);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
