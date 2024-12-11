@@ -123,24 +123,6 @@ router.post('/update', function (req, res, next) {
     });
 
     res.redirect('/exoplanets');
-});
-
-
-router.post('/', async (req, res) => {
-    const { name, size, atmosphere } = req.body;
-  
-    // Vérification de la duplication
-    const exists = await Exoplanet.findOne({ where: { name } });
-    if (exists) return res.status(400).send('Planet already exists');
-  
-    // Validation des caractéristiques
-    if (size <= 0) return res.status(400).send('Invalid planet size');
-  
-    // Ajout de la planète
-    await Exoplanet.create({ name, size, atmosphere });
-    res.render('exoplanets/register', { message: 'Planet added successfully' });
-});
-  
-
+})
 
 module.exports = router;
