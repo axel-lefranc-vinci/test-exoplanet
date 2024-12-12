@@ -1,9 +1,6 @@
 const Planet = require('../../models/Planet');
 
 describe('Planet Model', () => {
-  beforeEach(() => {
-    Planet.clear();
-  });
 
   it('Test 1: doit enregistrer une nouvelle planète', () => {
     const planet = {
