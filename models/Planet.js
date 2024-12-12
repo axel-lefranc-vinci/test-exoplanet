@@ -18,11 +18,11 @@ module.exports.save = (data) => {
     throw new Error('Invalid planet atmosphere');
   }
 
-  if (data.discoveryYear <= 0 || typeof data.discoveryYear !== 'number') {
+  if (data.discoveryYear <= 0) {
     throw new Error('Invalid discovery year');
   }
 
-  if (data.size <= 0 || typeof data.size !== 'number') {
+  if (data.size <= 0) {
     throw new Error('Invalid planet size');
   }
 

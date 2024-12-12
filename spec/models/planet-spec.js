@@ -5,9 +5,6 @@ describe('Planet Model', () => {
 
   afterAll(() => { Planet.delete(); });
 
-
-  
-
   it('Test 1: ne doit pas enregistrer de doublons', () => {
     const planet = {
       uniqueName: 'Earth',
