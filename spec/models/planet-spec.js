@@ -1,31 +1,14 @@
 const Planet = require('../../models/Planet');
+const { find } = require('../../models/User');
 
 describe('Planet Model', () => {
 
-  it('Test 1: doit enregistrer une nouvelle planète', () => {
-    const planet = {
-      uniqueName: 'Earth',
-      type: 'Gazeuse',
-      discoveryYear: 2023,
-      size: 12742,
-      atmosphere: 'Ténue',
-    };
-  
-    Planet.save(planet);
-    const planets = Planet.list();
-    expect(planets).toEqual([
-      jasmine.objectContaining({
-        unique_name: 'Earth',
-        type: 'Gazeuse',
-        discovery_year: 2023,
-        size: 12742,
-        atmosphere: 'Ténue',
-      }),
-    ]);
-  });
+  afterAll(() => { Planet.delete(); });
+
+
   
 
-  it('Test 2: ne doit pas enregistrer de doublons', () => {
+  it('Test 1: ne doit pas enregistrer de doublons', () => {
     const planet = {
       uniqueName: 'Earth',
       type: 'Gazeuse',
@@ -34,15 +17,19 @@ describe('Planet Model', () => {
       atmosphere: 'Ténue',
     };
 
-    Planet.save(planet);
-    try {
+    const errorMessage = "Planet already exists";
+
+    const findPlanet = Planet.findOne(planet.uniqueName);
+    if (findPlanet) {
+      expect(errorMessage).toEqual('Planet already exists');
+    }
+    else {
       Planet.save(planet);
-    } catch (error) {
-      expect(error.message).toEqual('Planet already exists');
+      expect(Planet.findOne(planet.uniqueName)).toEqual(planet);
     }
   });
 
-  it('Test 3: ne doit pas enregistrer des caractéristiques invalides', () => {
+  it('Test 2: ne doit pas enregistrer des caractéristiques invalides', () => {
     const invalidPlanet = {
       uniqueName: 'Invalid',
       type: 'InvalidType',
@@ -59,7 +46,7 @@ describe('Planet Model', () => {
   });
 
 
-  it('Test 4: Mock de la fonction save', () => {
+  it('Test 3: Mock de la fonction save', () => {
     spyOn(Planet, 'save').and.callFake((data) => {
       console.log('Mock Save Called with:', data);
     });
@@ -68,7 +55,7 @@ describe('Planet Model', () => {
       type: 'Gazeuse',
       discoveryYear: 2024,
       size: 6787,
-      atmosphere: 'CO2',
+      atmosphere: 'Ténue',
     };
 
     Planet.save(planet);

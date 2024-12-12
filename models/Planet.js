@@ -37,6 +37,10 @@ module.exports.save = (data) => {
   stmt.run(data.uniqueName, data.type, data.discoveryYear, data.size, data.atmosphere);
 };
 
-module.exports.clear = () => {
-  db.exec('DELETE FROM PLANETS');
+module.exports.delete = () => {
+  db.exec('DELETE FROM planets WHERE planet_id = (SELECT MAX(planet_id) FROM planets)');
+};
+
+module.exports.findOne = (uniqueName) => {
+  return db.prepare('SELECT * FROM planets WHERE unique_name = ?').get(uniqueName);
 };
